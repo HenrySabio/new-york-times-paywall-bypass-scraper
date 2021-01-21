@@ -1,0 +1,57 @@
+html {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: system-ui,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,Segoe UI,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #141821;
+    text-align: left;
+    background-color: #fff;
+}
+
+.row {
+    width: auto;
+}
+
+.container { 
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.item {
+    
+    line-height: 20px;
+    font-weight: bold;
+    font-size: 2em;
+    text-align: center;
+}
+  
+.vertical-center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translateX(50%);
+}
+
+.card-input {
+    background: #fff;
+    -webkit-box-shadow: 0 10px 30px rgba(209,213,223,.5);
+    box-shadow: 0 10px 30px rgba(209,213,223,.5);
+    -webkit-appearance: none;
+    border-radius: 1rem;
+    height: calc(2.25em + 1.125rem + 2px);
+    padding: .5rem 1.5rem;
+    outline: 0!important;
+    border: none!important;
+}

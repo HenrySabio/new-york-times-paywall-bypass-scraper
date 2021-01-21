@@ -5,23 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New York Times - Article Scraper</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <div class="container">
-        <form id="form" class="form">
-            <h2>New York Times Article Scraper</h2>
-            <div class="form-control">
-                <label for="article-url">Article URL</label>
-                <input type="text" id="article-url" placeholder="Enter url to NYT article here">
-                <small>Error Message</small>
-            </div>
-
-            <button type="submit">Submit</button>
-        </form>
+        <div class="row">
+            <form class="item">
+                <div class="input-group card-input-group ">
+                    <input placeholder="New York Times Article URL" type="text" class="card-input w-100">
+                </div>
+            </form>
+        </div>
     </div>
 
-    <script src="/scraper.js"></script>
+    <script src="scraper.js"></script>
 </body>
 
 </html>
