@@ -1,45 +1,27 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 
-const testURL = "insert nyt article url here";
+let articleLink = "";
+const article = new Object();
 
-axios.get(testURL).then((res) => {
+axios.get(articleLink).then((res) => {
     const $ = cheerio.load(res.data);
+    article.title = $("#site-content").find("h1").text();
+    article.articlePicture = $("picture").find("source").attr("srcset");
+    article.summary = $("#site-content").find("#article-summary").text();
+    article.multiAuthors = $("#site-content").find(".css-4z5zii").text();
+    article.singleAuthor = $("#site-content").find(".last-byline").text();
+    article.authorPicture = $(`img[title="${article.singleAuthor}"]`).attr("src");
 
-    console.log("\n");
-    console.log($("#site-content").find("h1").text());
-    const articleTitle = $("#site-content").find("h1").text();
+    article.writeDate = []
+    $(`time`).find("span").each(function (i, el) {
+        article.writeDate[i] = $(this).text();
+    });
 
-    console.log("\n");
-    console.log($("#site-content").find("#article-summary").text());
-    const articleSummary = $("#site-content").find("#article-summary").text();
-
-    console.log("\n");
-    console.log($("#site-content").find(".css-4z5zii").text())
-    const articleAuthors = $("#site-content").find(".css-4z5zii").text();
-
-
-    console.log("\n");
-    console.log($("#site-content").find(".last-byline").text());
-    const authorName = $("#site-content").find(".last-byline").text();
-
-    console.log("\n");
-    console.log($(`img[title="${authorName}"]`).attr("src"));
-    const authorPicture = $(`img[title="${authorName}"]`).attr("src");
-
-    console.log("\n");
-    console.log($("li").find("time").text());
-
-    console.log("\n");
-    const articleSections = []
+    article.content = []
     $(`section[name = articleBody]`).find("p").each(function (i, el) {
-        articleSections[i] = $(this).html();
-    }); 
+        article.content[i] = $(this).html();
+    });
 
-    console.log(articleSections);
-
-    // console.log($(`section[name = articleBody]`).html());
-    // const articleCopy = $(`section[name = articleBody]`).html();
-    
-    
-  });
+    console.log(article);
+});
