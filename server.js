@@ -10,7 +10,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static("express"));
 
 // default URL for website
-app.use('/', function (req, res) {
+app.post('/scrape', function (req, res) {
     //__dirname : It will resolve to your project folder.
     console.log(req.body);
     console.log(req.body.test);
