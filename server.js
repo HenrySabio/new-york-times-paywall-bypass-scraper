@@ -1,17 +1,15 @@
-const http = require('http');
 const express = require('express');
 const app = express();
 const path = require('path');
 const axios = require('axios');
 const cheerio = require('cheerio');
-const { runInNewContext } = require('vm');
 
 
 app.set('view engine', 'ejs');
 app.use(express.json());       // to support JSON-encoded bodies
 app.use(express.urlencoded({ extended: false }));
 
-app.set('views', path.join(__dirname, 'express'));
+app.set('views', path.join(__dirname, 'views'));
 
 app.get('/', function (req, res) {
     //load index page
