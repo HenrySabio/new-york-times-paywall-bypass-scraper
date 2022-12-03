@@ -31,7 +31,7 @@ app.post('/article', function (req, res) {
             article.title = $('#site-content')
                 .find('h1')
                 .text();
-            article.articlePicture = $('[data-testid="photoviewer-children"] picture')
+            article.heroImg = $('[data-testid="photoviewer-children"] picture')
                 .find('img')
                 .attr('src');
             article.summary = $('#site-content')
@@ -53,9 +53,8 @@ app.post('/article', function (req, res) {
             $(`section[name = articleBody]`)
                 .find("p")
                 .each(function (i, el) {
-                    article.content[i] = $(this).html();
+                    article.content[i] = $(this).text();
                 });
-
 
             res.render('article', { article });
         })
