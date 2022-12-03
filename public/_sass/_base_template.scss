@@ -1,0 +1,19 @@
+//select all headings
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: $font_stack_primary;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    margin-top: 0;
+    text-transform: capitalize !important;
+}
+
+body {
+    font-family: $font_stack_secondary;
+    font-size: 1rem;
+    line-height: 1.5;
+}
