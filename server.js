@@ -7,7 +7,6 @@ const cheerio = require('cheerio');
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.json());       // to support JSON-encoded bodies
 app.use(express.urlencoded({ extended: false }));
 
 app.get('/', function (req, res) {
@@ -28,6 +27,7 @@ app.post('/article', function (req, res) {
     })
         .then(response => {
             const $ = cheerio.load(response.data);
+            article.url = request;
             article.title = $('#site-content')
                 .find('h1')
                 .text();
