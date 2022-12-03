@@ -4,12 +4,11 @@ const path = require('path');
 const axios = require('axios');
 const cheerio = require('cheerio');
 
-
 app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());       // to support JSON-encoded bodies
 app.use(express.urlencoded({ extended: false }));
-
-app.set('views', path.join(__dirname, 'views'));
 
 app.get('/', function (req, res) {
     //load index page
