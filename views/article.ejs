@@ -1,26 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include('partials/head') %>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New York Times - Article Scraper</title>
-    <link rel="stylesheet" href="/css/min/style.min.css">
-</head>
-
-<body>
-    <div class="container">
-        <div class="row">
-            <% if(article) { %>
-            <div class="item">
-                <h2><%= article.title %></h2>
-                <p><%= article.summary %></p>
-                <a href="<%= article.url %>">Read More</a>
+<div class="container">
+    <div class="row justify-content-center">
+        <% if(article) { %>
+        <% if (article.heroImg) { %>
+        <div class="col-lg-10 mt-5 mb-4">
+            <div class="content-box hero-img" style="background-image: url('<%= article.heroImg %>');">
+                <div class="text mb-3">
+                    <h2><%= article.title %></h2>
+                </div>
+            </div>
+        </div>
+        <% } else { %>
+        <div class="col-lg-10">
+            <h2><%= article.title %></h2>
+        </div>
+        <% } %>
+        <div class="col-lg-9">
+            <% if (article.authorPicture && article.singleAuthor) { %>
+            <div class="author mb-4">
+                <img src="<%= article.authorPicture %>" alt="<%= article.authorName %>">
+                <span>Written by:</span>
+                <span><%= article.singleAuthor %></span>
             </div>
             <% } %>
-            
+            <% for(let content of article.content) { %>
+            <p><%= content %></p>
+            <% } %>
+            <a href="<%= article.url %>">Read More</a>
         </div>
     </div>
-</body>
+    <% } %>
+</div>
 
-</html>
+<%- include('partials/footer') %>

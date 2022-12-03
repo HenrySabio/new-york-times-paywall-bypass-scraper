@@ -1,20 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include('partials/head') %>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New York Times - Article Scraper</title>
-    <link rel="stylesheet" href="/css/min/style.min.css">
-</head>
-
-<body>
     <div class="container">
         <div class="row">
             <form method="post" action="/article" class="item">
                 <div class="input-group card-input-group ">
                     <span class="input-container">
-                        <input name="url" id="article-url" placeholder="New York Times Article URL" type="text" class="card-input">
+                        <input name="url" id="article-url" placeholder="New York Times Article URL" type="text"
+                            class="card-input">
                         <input type="submit">
                         <!-- <button value="ok" id="submit" class="search-button">Go</button> -->
                     </span>
@@ -23,6 +15,5 @@
 
         </div>
     </div>
-</body>
 
-</html>
+<%- include('partials/footer') %>
