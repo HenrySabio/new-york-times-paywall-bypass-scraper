@@ -1,0 +1,318 @@
+// Layout System Base Classes
+// --------------------------
+
+$columns: 12;
+$breakpoints: (
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px
+);
+
+@mixin breakpoint-up($breakpoint) {
+    $breakpoint-value: map-get($breakpoints, $breakpoint);
+
+    @if $breakpoint-value {
+        @media (min-width: $breakpoint-value) {
+            @content;
+        }
+    }
+
+    @else {
+        @warn "Invalid breakpoint: #{$breakpoint}";
+    }
+}
+
+@mixin breakpoint-down($breakpoint) {
+    $breakpoint-value: map-get($breakpoints, $breakpoint);
+
+    @if $breakpoint-value {
+        @media (max-width: $breakpoint-value) {
+            @content;
+        }
+    }
+
+    @else {
+        @warn "Invalid breakpoint: #{$breakpoint}";
+    }
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 15px;
+
+    .row {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin: 0 -15px;
+
+        &.justify-content-start {
+            justify-content: flex-start !important;
+        }
+
+        &.justify-content-end {
+            justify-content: flex-end !important;
+        }
+
+        &.justify-content-center {
+            justify-content: center !important;
+        }
+
+        &.justify-content-between {
+            justify-content: space-between !important;
+        }
+
+        &.justify-content-around {
+            justify-content: space-around !important;
+        }
+
+
+        .col {
+            flex: 1;
+        }
+
+        [class*='col'] {
+            margin: 0 15px;
+            width: 100%;
+        }
+    }
+}
+
+// Column and offset classes
+// -------------------------
+
+// Column classes
+@each $breakpoint,
+$value in $breakpoints {
+    @for $i from 1 through $columns {
+        @media (min-width: $value) {
+            .col-#{$breakpoint}-#{$i} {
+                width: calc((100% / $columns * $i) - 30px) !important;
+            }
+        }
+    }
+}
+
+// Column classes without column number
+// ------------------------------------
+
+@each $breakpoint,
+$value in $breakpoints {
+    .col-#{$breakpoint} {
+        @media (min-width: $value) {
+            max-width: 100%;
+        }
+    }
+}
+
+// Offset classes
+// --------------
+
+@each $breakpoint,
+$value in $breakpoints {
+    @media (min-width: $value) {
+        @for $i from 1 through $columns {
+            .offset-#{$breakpoint}-#{$i} {
+                margin-left: calc(100% / $columns * $i);
+            }
+        }
+    }
+}
+
+// Visibility, Margin, and Padding Classes
+// --------------------------------------
+
+$displays: (
+    none: none,
+    block: block,
+    inline: inline,
+    inline-block: inline-block,
+    flex: flex,
+    inline-flex: inline-flex
+);
+
+@mixin display($display) {
+    display: $display !important;
+}
+
+@each $display,
+$value in $displays {
+    .d-#{$display} {
+        @include display($value);
+    }
+}
+
+@each $breakpoint,
+$value in $breakpoints {
+    @each $display,
+    $display in $displays {
+        .d-#{$breakpoint}-#{$display} {
+            @media (min-width: $value) {
+                @include display($display);
+            }
+        }
+    }
+}
+
+// Define the values for the spacing variables
+$spacer: 1rem;
+$spacers: (
+    0: 0,
+    1: $spacer * .25,
+    2: $spacer * .5,
+    3: $spacer,
+    4: $spacer * 1.5,
+    5: $spacer * 3,
+);
+
+// Generate the margin and padding classes
+.mx-auto {
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+@each $key,
+$value in $spacers {
+
+    // Generate the margin classes
+    .m-#{$key} {
+        margin: $value !important;
+    }
+
+    .mt-#{$key} {
+        margin-top: $value !important;
+    }
+
+    .mr-#{$key} {
+        margin-right: $value !important;
+    }
+
+    .mb-#{$key} {
+        margin-bottom: $value !important;
+    }
+
+    .ml-#{$key} {
+        margin-left: $value !important;
+    }
+
+    .mx-#{$key} {
+        margin-left: $value !important;
+        margin-right: $value !important;
+    }
+
+    .my-#{$key} {
+        margin-top: $value !important;
+        margin-bottom: $value !important;
+    }
+
+    // Generate the padding classes
+    .p-#{$key} {
+        padding: $value !important;
+    }
+
+    .pt-#{$key} {
+        padding-top: $value !important;
+    }
+
+    .pr-#{$key} {
+        padding-right: $value !important;
+    }
+
+    .pb-#{$key} {
+        padding-bottom: $value !important;
+    }
+
+    .pl-#{$key} {
+        padding-left: $value !important;
+    }
+
+    .px-#{$key} {
+        padding-left: $value !important;
+        padding-right: $value !important;
+    }
+
+    .py-#{$key} {
+        padding-top: $value !important;
+        padding-bottom: $value !important;
+    }
+}
+
+// Generate the responsive margin and padding classes
+@each $breakpoint,
+$bp-value in $breakpoints {
+    @media (min-width: $bp-value) {
+
+        @each $key,
+        $value in $spacers {
+            .m-#{$breakpoint}-#{$key} {
+                margin: $value !important;
+            }
+
+            .mt-#{$breakpoint}-#{$key} {
+                margin-top: $value !important;
+            }
+
+            .mr-#{$breakpoint}-#{$key} {
+                margin-right: $value !important;
+            }
+
+            .mb-#{$breakpoint}-#{$key} {
+                margin-bottom: $value !important;
+            }
+
+            .ml-#{$breakpoint}-#{$key} {
+                margin-left: $value !important;
+            }
+
+            .mx-#{$breakpoint}-#{$key} {
+                margin-left: $value !important;
+                margin-right: $value !important;
+            }
+
+            .my-#{$breakpoint}-#{$key} {
+                margin-top: $value !important;
+                margin-bottom: $value !important;
+            }
+        }
+
+        @each $key,
+        $value in $spacers {
+
+            .p-#{$breakpoint}-#{$key} {
+                padding: $value !important;
+            }
+
+            .pt-#{$breakpoint}-#{$key} {
+                padding-top: $value !important;
+            }
+
+            .pr-#{$breakpoint}-#{$key} {
+                padding-right: $value !important;
+            }
+
+            .pb-#{$breakpoint}-#{$key} {
+                padding-bottom: $value !important;
+            }
+
+            .pl-#{$breakpoint}-#{$key} {
+                padding-left: $value !important;
+            }
+        }
+
+        @each $key,
+        $value in $spacers {
+            .px-#{$breakpoint}-#{$key} {
+                padding-left: $value !important;
+                padding-right: $value !important;
+            }
+
+            .py-#{$breakpoint}-#{$key} {
+                padding-top: $value !important;
+                padding-bottom: $value !important;
+            }
+        }
+    }
+}

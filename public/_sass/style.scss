@@ -1,7 +1,24 @@
-@import "../../node_modules/bootstrap/scss/bootstrap";
+//@import "../../node_modules/bootstrap/scss/bootstrap";
 @import "fonts";
 @import "variables";
 @import "base_template";
+@import "layout";
+
+@keyframes fadeInTopLeft {
+    0% {
+        opacity: 0;
+        transform: translate(-30px, -30px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+}
+
+.article {
+    animation: fadeInTopLeft 1s ease-in-out;
+}
 
 .content-box.hero-img {
     position: relative;
@@ -27,9 +44,11 @@
         background-color: rgba(0, 0, 0, 0.45);
         border-radius: 20px;
     }
+    
     .text {
         padding: 30px 30px 0px;
         z-index: 1;
+        
         h2 {
             color: #fff;
             font-size: 2.5rem;
@@ -40,16 +59,18 @@
     }
 }
 
-// Hover effect on hero
+// Hero Effects
 .content-box.hero-img {
     border-radius: 20px;
     transition: transform 0.3s, border-radius 0.3s, margin 0.25s ease-in-out;
     &:before {
         transition: border-radius 0.3s ease-in-out;
     }
+
     &:hover {
-        transform: scale(1.05);
+        transform: scale(1.02);
         margin-bottom: 10px;
+
         &,
         &:before {
             border-radius: 0px;
@@ -66,8 +87,30 @@
         // add shadow offset to bottom right
         box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
         transition: margin-right 0.3s ease-in-out;
+
         &:hover {
             margin-right: 20px;
+        }
+    }
+}
+
+.article-content {
+    p {
+        position: relative;
+        &:before {
+            //left border
+            content: "";
+            position: absolute;
+            left: -20px;
+            top: 0;
+            width: 2px;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0);
+            border-radius: 20px;
+            transition: background-color 0.5s ease-in-out;
+        }
+        &:hover:before {
+            background-color: rgba(0, 0, 0, 1);
         }
     }
 }
@@ -85,7 +128,6 @@
 
 .card-input {
     background: none;
-    width: 50%;
     outline: 0 !important;
     border: none !important;
 }

@@ -1,6 +1,6 @@
 <%- include('partials/head') %>
 
-<div class="container">
+<div class="container article">
     <div class="row justify-content-center">
         <% if(article) { %>
         <% if (article.heroImg) { %>
@@ -24,9 +24,11 @@
                 <span><%= article.singleAuthor %></span>
             </div>
             <% } %>
-            <% for(let content of article.content) { %>
-            <p><%= content %></p>
-            <% } %>
+            <div class="article-content">
+                <% for(let content of article.content) { %>
+                <p><%= content %></p>
+                <% } %>
+            </div>
             <a href="<%= article.url %>">Read More</a>
         </div>
     </div>
